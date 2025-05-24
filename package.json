@@ -2,17 +2,14 @@
   "name": "nest-projects",
   "version": "1.0.0",
   "scripts": {
-    "start:my-nest-app": "pnpm --filter my-nest-app start:dev"
-  },
-  "pnpm": {
-    "workspace": {
-      "packages": [
-        "packages/**"
-      ]
-    }
+    "start:bookBE": "pnpm --filter book-management-system-backend start:dev"
   },
   "devDependencies": {
     "@types/node": "^22.15.21",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2"
   }
 }
