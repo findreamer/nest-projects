@@ -1,0 +1,628 @@
+{
+  "cc": [],
+  "children": [
+    {
+      "cc": [],
+      "approver": [
+        {
+          "label": "胡路华",
+          "value": "luhua.hu",
+          "no": "114792",
+          "deptBusinessNo": "D12815",
+          "deptName": "金融市场部",
+          "mobileNo": "********888",
+          "email": "luhua.hu@msxf.com",
+          "tip": "-luhua.hu-金融市场部",
+          "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+          "positionName": "高级架构师1"
+        }
+      ],
+      "children": [
+        {
+          "cc": [],
+          "email": "",
+          "approver": [
+            {
+              "label": "胡路华",
+              "value": "luhua.hu",
+              "no": "114792",
+              "deptBusinessNo": "D12815",
+              "deptName": "金融市场部",
+              "mobileNo": "********888",
+              "email": "luhua.hu@msxf.com",
+              "tip": "-luhua.hu-金融市场部",
+              "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+              "positionName": "高级架构师1"
+            }
+          ],
+          "children": [
+            {
+              "cc": [],
+              "email": "",
+              "approver": [
+                {
+                  "label": "胡路华",
+                  "value": "luhua.hu",
+                  "no": "114792",
+                  "deptBusinessNo": "D12815",
+                  "deptName": "金融市场部",
+                  "mobileNo": "********888",
+                  "email": "luhua.hu@msxf.com",
+                  "tip": "-luhua.hu-金融市场部",
+                  "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                  "positionName": "高级架构师1"
+                }
+              ],
+              "children": [
+                {
+                  "cc": [],
+                  "email": "",
+                  "approver": [
+                    {
+                      "label": "胡路华",
+                      "value": "luhua.hu",
+                      "no": "114792",
+                      "deptBusinessNo": "D12815",
+                      "deptName": "金融市场部",
+                      "mobileNo": "********888",
+                      "email": "luhua.hu@msxf.com",
+                      "tip": "-luhua.hu-金融市场部",
+                      "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                      "positionName": "高级架构师1"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "cc": [],
+                      "email": "",
+                      "approver": [
+                        {
+                          "label": "胡路华",
+                          "value": "luhua.hu",
+                          "no": "114792",
+                          "deptBusinessNo": "D12815",
+                          "deptName": "金融市场部",
+                          "mobileNo": "********888",
+                          "email": "luhua.hu@msxf.com",
+                          "tip": "-luhua.hu-金融市场部",
+                          "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                          "positionName": "高级架构师1"
+                        }
+                      ],
+                      "children": [
+                        {
+                          "cc": [],
+                          "email": "",
+                          "approver": [
+                            {
+                              "label": "吴启用",
+                              "value": "qiyong.wu",
+                              "no": "114610",
+                              "deptBusinessNo": "D12815",
+                              "deptName": "金融市场部",
+                              "email": "qiyong.wu@msxf.com",
+                              "tip": "-qiyong.wu-金融市场部",
+                              "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                              "positionName": "测试8049"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "cc": [],
+                              "email": "",
+                              "approver": [
+                                {
+                                  "label": "吴启用",
+                                  "value": "qiyong.wu",
+                                  "no": "114610",
+                                  "deptBusinessNo": "D12815",
+                                  "deptName": "金融市场部",
+                                  "email": "qiyong.wu@msxf.com",
+                                  "tip": "-qiyong.wu-金融市场部",
+                                  "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                                  "positionName": "测试8049"
+                                }
+                              ],
+                              "children": [
+                                {
+                                  "cc": [],
+                                  "approver": [],
+                                  "children": [
+                                    {
+                                      "cc": [],
+                                      "email": "",
+                                      "approver": [
+                                        {
+                                          "label": "胡路华",
+                                          "value": "luhua.hu",
+                                          "no": "114792",
+                                          "deptBusinessNo": "D12815",
+                                          "deptName": "金融市场部",
+                                          "mobileNo": "********888",
+                                          "email": "luhua.hu@msxf.com",
+                                          "tip": "-luhua.hu-金融市场部",
+                                          "fullDeptName": "集团_马上消费金融股份有限公司_CEO直管部门_金融市场部",
+                                          "positionName": "高级架构师1"
+                                        }
+                                      ],
+                                      "children": [
+                                        {
+                                          "cc": [],
+                                          "flowInfo": {
+                                            "edges": [
+                                              {
+                                                "id": "c-05-3",
+                                                "data": { "offset": 70 },
+                                                "type": "step-edge",
+                                                "label": "是",
+                                                "isMain": "1",
+                                                "source": "c-05",
+                                                "target": "1",
+                                                "sourceHandle": "a",
+                                                "targetHandle": "b",
+                                                "extendsTarget": true
+                                              }
+                                            ],
+                                            "position": { "x": 48, "y": 1362 },
+                                            "flow_type": "end-node",
+                                            "flow_handleBars": [
+                                              {
+                                                "type": "target",
+                                                "position,": "top"
+                                              },
+                                              {
+                                                "id": "b",
+                                                "type": "target",
+                                                "position": "left"
+                                              }
+                                            ]
+                                          },
+                                          "node_key": "1",
+                                          "node_code": "end",
+                                          "node_name": "流程结束",
+                                          "node_event": [
+                                            {
+                                              "event_code": "1894287412703080449",
+                                              "event_name": "流程结束更新模型状态",
+                                              "event_type": "1",
+                                              "handler_type": "1"
+                                            },
+                                            {
+                                              "event_code": "1900116772684611586",
+                                              "event_name": "合成签名文件",
+                                              "event_type": "1",
+                                              "handler_type": "1"
+                                            },
+                                            {
+                                              "event_code": "1920390601746120706",
+                                              "event_name": "流程结束发送通知邮件消息",
+                                              "event_type": "1",
+                                              "handler_type": "1"
+                                            }
+                                          ],
+                                          "node_status": "2"
+                                        }
+                                      ],
+                                      "email_cc": "",
+                                      "flowInfo": {
+                                        "edges": [
+                                          {
+                                            "id": "06-1",
+                                            "isMain": "1",
+                                            "source": "06",
+                                            "target": "1",
+                                            "extendsTarget": true
+                                          },
+                                          {
+                                            "id": "c-05-2",
+                                            "label": "否",
+                                            "isMain": "1",
+                                            "source": "c-05",
+                                            "target": "06",
+                                            "sourceHandle": "b",
+                                            "extendsTarget": true,
+                                            "isConditionLine": true
+                                          }
+                                        ],
+                                        "position": { "x": 15, "y": 1222 },
+                                        "flow_type": "common-node",
+                                        "flow_handleBars": [
+                                          {
+                                            "id": "a",
+                                            "type": "target",
+                                            "position": "top"
+                                          },
+                                          {
+                                            "type": "source",
+                                            "position": "bottom"
+                                          }
+                                        ]
+                                      },
+                                      "node_key": "06",
+                                      "node_tag": "common",
+                                      "node_code": "custom",
+                                      "node_name": "06-总经理审批",
+                                      "node_type": "2",
+                                      "node_event": [
+                                        {
+                                          "event_code": "1894285014580408322",
+                                          "event_name": "授权书更新待审核状态",
+                                          "event_type": "1",
+                                          "handler_type": "0"
+                                        },
+                                        {
+                                          "event_code": "1897542334190514177",
+                                          "event_name": "流程审核的待办消息",
+                                          "event_type": "1",
+                                          "handler_type": "0"
+                                        },
+                                        {
+                                          "event_code": "1897553599856177154",
+                                          "event_name": "待办消息置为已办",
+                                          "event_type": "1",
+                                          "handler_type": "1"
+                                        }
+                                      ],
+                                      "node_status": "2"
+                                    }
+                                  ],
+                                  "flowInfo": {
+                                    "edges": [
+                                      {
+                                        "id": "c-05-1",
+                                        "isMain": "1",
+                                        "source": "05",
+                                        "target": "c-05"
+                                      }
+                                    ],
+                                    "position": { "x": 44, "y": 1082 },
+                                    "flow_type": "condition-node",
+                                    "flow_handleBars": [
+                                      {
+                                        "id": "a",
+                                        "type": "source",
+                                        "position": "left"
+                                      },
+                                      {
+                                        "id": "b",
+                                        "type": "source",
+                                        "position": "bottom"
+                                      },
+                                      { "type": "target", "position": "top" }
+                                    ]
+                                  },
+                                  "node_key": "c-05",
+                                  "node_code": "condition",
+                                  "node_name": "授权人是否是总经理",
+                                  "node_type": "0",
+                                  "node_status": "",
+                                  "node_condition": [
+                                    {
+                                      "node_key": "1",
+                                      "expression": "#{@ausmApproverConfigServiceImpl.checkIncludeApprove(#appId,#dsId,1891755351788470274L,'06',#_curr_node['approver']['email']) }"
+                                    },
+                                    {
+                                      "node_key": "06",
+                                      "expression": "#{!@ausmApproverConfigServiceImpl.checkIncludeApprove(#appId,#dsId,1891755351788470274L,'06',#_curr_node['approver']['email']) }"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "email_cc": "",
+                              "flowInfo": {
+                                "edges": [
+                                  {
+                                    "id": "6",
+                                    "isMain": "1",
+                                    "source": "04",
+                                    "target": "05"
+                                  }
+                                ],
+                                "position": { "x": 15, "y": 942 },
+                                "flow_type": "common-node",
+                                "flow_handleBars": [
+                                  {
+                                    "id": "a",
+                                    "type": "target",
+                                    "position": "top"
+                                  },
+                                  {
+                                    "id": "b",
+                                    "type": "target",
+                                    "position": "left"
+                                  },
+                                  { "type": "source", "position": "bottom" }
+                                ]
+                              },
+                              "node_key": "05",
+                              "node_tag": "sign",
+                              "node_code": "custom",
+                              "node_name": "05-授权人确认并在“授权人”处签字",
+                              "node_type": "2",
+                              "node_event": [
+                                {
+                                  "event_code": "1896797404155068417",
+                                  "event_name": "授权书更新待签字状态",
+                                  "event_type": "1",
+                                  "handler_type": "0"
+                                },
+                                {
+                                  "event_code": "1897542334190514177",
+                                  "event_name": "流程审核的待办消息",
+                                  "event_type": "1",
+                                  "handler_type": "0"
+                                },
+                                {
+                                  "event_code": "1897553599856177154",
+                                  "event_name": "待办消息置为已办",
+                                  "event_type": "1",
+                                  "handler_type": "1"
+                                },
+                                {
+                                  "event_code": "1900105262612660226",
+                                  "event_name": "更新签名记录的授权人签名状态",
+                                  "event_type": "1",
+                                  "handler_type": "1"
+                                }
+                              ],
+                              "node_status": "2"
+                            }
+                          ],
+                          "email_cc": "",
+                          "flowInfo": {
+                            "edges": [
+                              {
+                                "id": "5",
+                                "isMain": "1",
+                                "source": "03",
+                                "target": "04"
+                              }
+                            ],
+                            "position": { "x": 15, "y": 802 },
+                            "flow_type": "common-node",
+                            "flow_handleBars": [
+                              { "type": "target", "position": "top" },
+                              { "type": "source", "position": "bottom" }
+                            ]
+                          },
+                          "node_key": "04",
+                          "node_tag": "sign",
+                          "node_code": "custom",
+                          "node_name": "04-高管确认并在“被授权人”处签字",
+                          "node_type": "2",
+                          "node_event": [
+                            {
+                              "event_code": "1896797404155068417",
+                              "event_name": "授权书更新待签字状态",
+                              "event_type": "1",
+                              "handler_type": "0"
+                            },
+                            {
+                              "event_code": "1897542334190514177",
+                              "event_name": "流程审核的待办消息",
+                              "event_type": "1",
+                              "handler_type": "0"
+                            },
+                            {
+                              "event_code": "1897553599856177154",
+                              "event_name": "待办消息置为已办",
+                              "event_type": "1",
+                              "handler_type": "1"
+                            },
+                            {
+                              "event_code": "1900105296741711874",
+                              "event_name": "更新签名记录的被授权人签名状态",
+                              "event_type": "1",
+                              "handler_type": "1"
+                            }
+                          ],
+                          "node_status": "2"
+                        }
+                      ],
+                      "email_cc": "",
+                      "flowInfo": {
+                        "edges": [
+                          {
+                            "id": "4",
+                            "isMain": "1",
+                            "source": "02-1",
+                            "target": "03"
+                          }
+                        ],
+                        "position": { "x": 15, "y": 672 },
+                        "flow_type": "common-node",
+                        "flow_handleBars": [
+                          { "type": "target", "position": "top" },
+                          { "type": "source", "position": "bottom" }
+                        ]
+                      },
+                      "node_key": "03",
+                      "node_tag": "common",
+                      "node_code": "custom",
+                      "node_name": "03-合规部审核",
+                      "node_type": "2",
+                      "node_event": [
+                        {
+                          "event_code": "1897542334190514177",
+                          "event_name": "流程审核的待办消息",
+                          "event_type": "1",
+                          "handler_type": "0"
+                        },
+                        {
+                          "event_code": "1897553599856177154",
+                          "event_name": "待办消息置为已办",
+                          "event_type": "1",
+                          "handler_type": "1"
+                        }
+                      ],
+                      "node_status": "2"
+                    }
+                  ],
+                  "email_cc": "",
+                  "flowInfo": {
+                    "edges": [
+                      {
+                        "id": "3-1",
+                        "isMain": "1",
+                        "source": "02",
+                        "target": "02-1"
+                      }
+                    ],
+                    "position": { "x": 15, "y": 522 },
+                    "flow_type": "common-node",
+                    "flow_handleBars": [
+                      { "type": "target", "position": "top" },
+                      { "type": "source", "position": "bottom" }
+                    ]
+                  },
+                  "node_key": "02-1",
+                  "node_tag": "common",
+                  "node_code": "custom",
+                  "node_name": "02-1 HR审核",
+                  "node_type": "2",
+                  "node_event": [
+                    {
+                      "event_code": "1897542334190514177",
+                      "event_name": "流程审核的待办消息",
+                      "event_type": "1",
+                      "handler_type": "0"
+                    },
+                    {
+                      "event_code": "1897553599856177154",
+                      "event_name": "待办消息置为已办",
+                      "event_type": "1",
+                      "handler_type": "1"
+                    }
+                  ],
+                  "node_status": "2"
+                }
+              ],
+              "email_cc": "",
+              "flowInfo": {
+                "edges": [
+                  { "id": "3", "isMain": "1", "source": "01", "target": "02" }
+                ],
+                "position": { "x": 15, "y": 382 },
+                "flow_type": "common-node",
+                "flow_handleBars": [
+                  { "type": "target", "position": "top" },
+                  { "type": "source", "position": "bottom" }
+                ]
+              },
+              "node_key": "02",
+              "node_tag": "common",
+              "node_code": "custom",
+              "node_name": "02-法务内控部负责人审核",
+              "node_type": "2",
+              "node_event": [
+                {
+                  "event_code": "1897542334190514177",
+                  "event_name": "流程审核的待办消息",
+                  "event_type": "1",
+                  "handler_type": "0"
+                },
+                {
+                  "event_code": "1897553599856177154",
+                  "event_name": "待办消息置为已办",
+                  "event_type": "1",
+                  "handler_type": "1"
+                }
+              ],
+              "node_status": "2"
+            }
+          ],
+          "email_cc": "",
+          "flowInfo": {
+            "edges": [
+              { "id": "2", "isMain": "1", "source": "00", "target": "01" }
+            ],
+            "position": { "x": 15, "y": 242 },
+            "flow_type": "common-node",
+            "flow_handleBars": [
+              { "type": "target", "position": "top" },
+              { "type": "source", "position": "bottom" }
+            ]
+          },
+          "node_key": "01",
+          "node_tag": "common",
+          "node_code": "custom",
+          "node_name": "01-内控部负责人审核",
+          "node_type": "2",
+          "node_event": [
+            {
+              "event_code": "1897542334190514177",
+              "event_name": "流程审核的待办消息",
+              "event_type": "1",
+              "handler_type": "0"
+            },
+            {
+              "event_code": "1897553599856177154",
+              "event_name": "待办消息置为已办",
+              "event_type": "1",
+              "handler_type": "1"
+            }
+          ],
+          "node_param": {},
+          "node_status": "2"
+        }
+      ],
+      "flowInfo": {
+        "edges": [{ "id": "1", "isMain": "1", "source": "0", "target": "00" }],
+        "position": { "x": 15, "y": 102 },
+        "flow_type": "common-node",
+        "flow_handleBars": [
+          { "type": "target", "position": "top" },
+          { "type": "source", "position": "bottom" }
+        ]
+      },
+      "node_key": "00",
+      "node_tag": "submit",
+      "node_code": "applicant",
+      "node_name": "00-生成授权书并发起审核",
+      "node_type": "2",
+      "node_event": [
+        {
+          "event_code": "1897570344054616066",
+          "event_name": "流程驳回的待办消息",
+          "event_type": "1",
+          "handler_type": "0"
+        },
+        {
+          "event_code": "1901892802199764993",
+          "event_name": "更新模型状态为驳回",
+          "event_type": "1",
+          "handler_type": "0"
+        },
+        {
+          "event_code": "1897553599856177154",
+          "event_name": "待办消息置为已办",
+          "event_type": "1",
+          "handler_type": "1"
+        },
+        {
+          "event_code": "1902281643039068161",
+          "event_name": "重新提交流程",
+          "event_type": "1",
+          "handler_type": "3"
+        }
+      ],
+      "node_status": "2"
+    }
+  ],
+  "flowInfo": {
+    "position": { "x": 0, "y": 0 },
+    "flow_type": "start-node",
+    "flow_handleBars": [{ "type": "source", "position": "bottom" }]
+  },
+  "node_key": "0",
+  "node_code": "start",
+  "node_name": "开始节点-高管授权书",
+  "node_event": [
+    {
+      "event_code": "1894285482010423297",
+      "event_name": "保存模型数据(状态)",
+      "event_type": "1",
+      "handler_type": "0"
+    }
+  ]
+}
