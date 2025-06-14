@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,6 +20,11 @@ export class UserController {
   @Post('register')
   register(@Body() registerUser: RegisterUserDto) {
     return this.userService.register(registerUser);
+  }
+
+  @Get('register-captcha')
+  async captcha(@Query('address') address: string) {
+    return this.userService.captcha(address);
   }
 
   @Post()
