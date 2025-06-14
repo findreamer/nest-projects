@@ -7,6 +7,7 @@ import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
+    RedisModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -24,7 +25,6 @@ import { RedisModule } from './redis/redis.module';
       },
     }),
     UserModule,
-    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
