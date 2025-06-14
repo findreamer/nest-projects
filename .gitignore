@@ -9,3 +9,8 @@ dist
 
 # 日志文件
 *.log
+
+# 环境变量文件
+.env
+.env.*
+!.env.example
