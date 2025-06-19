@@ -5,27 +5,32 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { RedisModule } from './redis/redis.module';
 import { EmailModule } from './email/email.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as path from 'path';
 
 @Module({
   imports: [
     RedisModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'your_password',
-      database: 'meeting_room',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      logging: false,
-      poolSize: 10,
-      connectorPackage: 'mysql2',
-      // extra: {
-      //   authPlugin: 'sha256_password',
-      // },
+    TypeOrmModule.forRootAsync({
+      useFactory(config: ConfigService) {
+        return {
+          type: 'mysql',
+          host: config.get('mysql_server_host'),
+          port: config.get('mysql_server_port'),
+          username: config.get('mysql_server_username'),
+          password: config.get('mysql_server_password'),
+          database: config.get('mysql_server_database'),
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: true,
+          logging: false,
+          poolSize: 10,
+          connectorPackage: 'mysql2',
+          // extra: {
+          //   authPlugin: 'sha256_password',
+          // },
+        };
+      },
+      inject: [ConfigService],
     }),
     ConfigModule.forRoot({
       isGlobal: true,
