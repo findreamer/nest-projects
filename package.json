@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nestjs/config": "^4.0.2",
+    "@nestjs/jwt": "^11.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/typeorm": "^11.0.0",
     "class-transformer": "^0.5.1",

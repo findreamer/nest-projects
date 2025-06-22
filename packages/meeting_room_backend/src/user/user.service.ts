@@ -15,6 +15,8 @@ import { md5 } from '@/utils';
 import { EmailService } from '@/email/email.service';
 import { Role } from './entities/role.entity';
 import { Permission } from './entities/permission.entity';
+import { LoginUserDto } from './dto/login-user.dto';
+import { LoginUserVo } from './vo/login-user.vo';
 
 @Injectable()
 export class UserService {
@@ -126,5 +128,46 @@ export class UserService {
       this.logger.error(error, UserService.name);
       return '验证码发送失败';
     }
+  }
+
+  async login(loginUser: LoginUserDto, isAdmin: boolean) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username: loginUser.username,
+        isAdmin,
+      },
+      relations: ['roles', 'roles.permissions'],
+    });
+
+    if (!user) {
+      throw new HttpException('用户不存在', HttpStatus.BAD_REQUEST);
+    }
+
+    if (user.password !== md5(loginUser.password)) {
+      throw new HttpException('密码错误', HttpStatus.BAD_REQUEST);
+    }
+    const vo = new LoginUserVo();
+    vo.userInfo = {
+      id: user.id,
+      username: user.username,
+      nickName: user.nickName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      headPic: user.headPic,
+      createTime: +user.createTime,
+      isFrozen: user.isFrozen,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((role) => role.name),
+      permissions: user.roles.reduce((arr, item) => {
+        item.permissions.forEach((permission) => {
+          if (!arr.includes(permission)) {
+            arr.push(permission);
+          }
+        });
+        return arr;
+      }, []),
+    };
+
+    return user;
   }
 }

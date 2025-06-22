@@ -25,7 +25,13 @@ export class UserController {
 
   @Post('login')
   async login(@Body() loginUser: LoginUserDto) {
-    console.log('loginUser', loginUser);
-    return 'success';
+    const user = await this.userService.login(loginUser, false);
+    return user;
+  }
+
+  @Post('admin/login')
+  async adminLogin(@Body() loginUser: LoginUserDto) {
+    const user = await this.userService.login(loginUser, true);
+    return user;
   }
 }
