@@ -25,13 +25,26 @@ export class UserController {
 
   @Post('login')
   async login(@Body() loginUser: LoginUserDto) {
-    const user = await this.userService.login(loginUser, false);
-    return user;
+    const vo = await this.userService.login(loginUser, false);
+
+    return vo;
   }
 
   @Post('admin/login')
   async adminLogin(@Body() loginUser: LoginUserDto) {
     const user = await this.userService.login(loginUser, true);
     return user;
+  }
+
+  @Get('refresh')
+  async refresh(@Query('refreshToken') refreshToken: string) {
+    const tokens = await this.userService.refresh(refreshToken, false);
+    return tokens;
+  }
+
+  @Get('admin/refresh')
+  async adminRefresh(@Query('refreshToken') refreshToken: string) {
+    const tokens = await this.userService.refresh(refreshToken, true);
+    return tokens;
   }
 }

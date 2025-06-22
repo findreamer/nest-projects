@@ -4,6 +4,7 @@ import {
   Inject,
   Injectable,
   Logger,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { Repository } from 'typeorm';
@@ -16,7 +17,9 @@ import { EmailService } from '@/email/email.service';
 import { Role } from './entities/role.entity';
 import { Permission } from './entities/permission.entity';
 import { LoginUserDto } from './dto/login-user.dto';
-import { LoginUserVo } from './vo/login-user.vo';
+import { LoginUserVo, UserInfo } from './vo/login-user.vo';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
@@ -31,6 +34,8 @@ export class UserService {
     private roleRepository: Repository<Role>,
     @InjectRepository(Permission)
     private permissionRepository: Repository<Permission>,
+    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
 
   private logger = new Logger(UserService.name);
@@ -168,6 +173,85 @@ export class UserService {
       }, []),
     };
 
-    return user;
+    const { accessToken, refreshToken } = this.generateToken(vo.userInfo);
+    vo.accessToken = accessToken;
+    vo.refreshToken = refreshToken;
+
+    return vo;
+  }
+
+  /**  刷新token */
+  async refresh(refreshToken: string, isAdmin: boolean) {
+    try {
+      const data = this.jwtService.verify<{ userId: number }>(refreshToken);
+      const user = await this.findUserById(data.userId, isAdmin);
+      const tokens = this.generateToken(user);
+      return {
+        access_token: tokens.accessToken,
+        refresh_token: tokens.refreshToken,
+      };
+    } catch (e) {
+      this.logger.error(e, UserService.name);
+      throw new UnauthorizedException('token 已失效，请重新登录');
+    }
+  }
+
+  async findUserById(userId: number, isAdmin: boolean): Promise<UserInfo> {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+        isAdmin,
+      },
+      relations: ['roles', 'roles.permissions'],
+    });
+
+    return {
+      id: user.id,
+      username: user.username,
+      nickName: user.nickName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      headPic: user.headPic,
+      createTime: +user.createTime,
+      isFrozen: user.isFrozen,
+      isAdmin: user.isAdmin,
+      roles: user.roles.map((role) => role.name),
+      permissions: user.roles.reduce((arr, item) => {
+        item.permissions.forEach((permission) => {
+          if (!arr.includes(permission.code)) {
+            arr.push(permission.code);
+          }
+        });
+        return arr;
+      }, []),
+    };
+  }
+
+  generateToken(user: UserInfo) {
+    const accessToken = this.jwtService.sign(
+      {
+        userId: user.id,
+        username: user.username,
+        roles: user.roles,
+        permissions: user.permissions,
+      },
+      {
+        expiresIn: this.configService.get('jwt_access_token_expires') ?? '30m',
+      },
+    );
+
+    const refreshToken = this.jwtService.sign(
+      {
+        userId: user.id,
+      },
+      {
+        expiresIn: this.configService.get('jwt_refresh_token_expires') ?? '7d',
+      },
+    );
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 }

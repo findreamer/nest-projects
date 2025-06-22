@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { RedisModule } from './redis/redis.module';
 import { EmailModule } from './email/email.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import * as path from 'path';
 
 @Module({
@@ -38,6 +39,18 @@ import * as path from 'path';
         path.join(__dirname, '.env'),
         path.join(__dirname, '.env.dev'),
       ],
+    }),
+    JwtModule.registerAsync({
+      global: true,
+      useFactory(config: ConfigService) {
+        return {
+          secret: config.get('jwt_secret'),
+          signOptions: {
+            expiresIn: config.get('jwt_access_token_expires'), // 30分钟过期
+          },
+        };
+      },
+      inject: [ConfigService],
     }),
     UserModule,
     EmailModule,
