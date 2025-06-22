@@ -1,3 +1,4 @@
+import { Permission } from '@/user/entities/permission.entity';
 export interface UserInfo {
   id: number;
   username: string;
@@ -13,7 +14,7 @@ export interface UserInfo {
 
   roles: string[];
 
-  permissions: string[];
+  permissions: Permission[];
 }
 
 export class LoginUserVo {

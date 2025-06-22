@@ -8,6 +8,9 @@ import { EmailModule } from './email/email.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import * as path from 'path';
+import { APP_GUARD } from '@nestjs/core';
+import { LoginGuard } from './common/guard/login.guard';
+import { PermissionGuard } from './common/guard/permission.guard';
 
 @Module({
   imports: [
@@ -56,6 +59,16 @@ import * as path from 'path';
     EmailModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: LoginGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+  ],
 })
 export class AppModule {}
