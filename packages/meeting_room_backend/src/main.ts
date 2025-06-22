@@ -2,6 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import {
+  FormatResponseInterceptor,
+  InvokeRecordInterceptor,
+} from '@/common/interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,6 +14,12 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.useGlobalInterceptors(new FormatResponseInterceptor());
+
+  if (process.env.NODE_ENV === 'development') {
+    app.useGlobalInterceptors(new InvokeRecordInterceptor());
+  }
+
   const configService = app.get(ConfigService);
   await app.listen(configService.get('nest_server_port') ?? 3000);
 }
