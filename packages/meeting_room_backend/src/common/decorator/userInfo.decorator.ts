@@ -9,6 +9,6 @@ export const UserInfo = createParamDecorator(
     if (!req.user) {
       return null;
     }
-    return field ? req.user[field] : req.user;
+    return field ? Reflect.get(req.user || {}, field) : req.user;
   },
 );

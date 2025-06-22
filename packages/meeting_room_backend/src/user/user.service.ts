@@ -20,6 +20,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { LoginUserVo, UserInfo } from './vo/login-user.vo';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { UserDetailVo } from './vo/user-info.vo';
 
 @Injectable()
 export class UserService {
@@ -197,6 +198,9 @@ export class UserService {
   }
 
   async findUserById(userId: number, isAdmin: boolean): Promise<UserInfo> {
+    if (!userId) {
+      throw new UnauthorizedException('token 已失效，请重新登录');
+    }
     const user = await this.userRepository.findOne({
       where: {
         id: userId,
@@ -253,5 +257,35 @@ export class UserService {
       accessToken,
       refreshToken,
     };
+  }
+
+  async findUserDetailById(userId: number): Promise<UserDetailVo> {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+      select: [
+        'id',
+        'username',
+        'nickName',
+        'email',
+        'headPic',
+        'phoneNumber',
+        'isFrozen',
+        'createTime',
+      ],
+    });
+
+    const vo = new UserDetailVo();
+    vo.id = user.id;
+    vo.email = user.email;
+    vo.username = user.username;
+    vo.headPic = user.headPic;
+    vo.phoneNumber = user.phoneNumber;
+    vo.nickName = user.nickName;
+    vo.createTime = user.createTime;
+    vo.isFrozen = user.isFrozen;
+
+    return vo;
   }
 }

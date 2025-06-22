@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { RequireLogin, UserInfo } from '@/common/decorator';
 
 @Controller('user')
 export class UserController {
@@ -47,4 +48,17 @@ export class UserController {
     const tokens = await this.userService.refresh(refreshToken, true);
     return tokens;
   }
+
+  @Get('info')
+  @RequireLogin()
+  async info(@UserInfo('userId') userId: number) {
+    return await this.userService.findUserDetailById(userId);
+  }
+
+  @Post(['update_password', 'admin/update_password'])
+  @RequireLogin()
+  async updatePassword(
+    @UserInfo('userId') userId: number,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {}
 }
