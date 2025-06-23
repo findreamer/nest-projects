@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RequireLogin, UserInfo } from '@/common/decorator';
+import { UpdatePasswordDto } from './dto/update-password.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -60,5 +62,21 @@ export class UserController {
   async updatePassword(
     @UserInfo('userId') userId: number,
     @Body() updatePasswordDto: UpdatePasswordDto,
-  ) {}
+  ) {
+    return await this.userService.updatePassword(userId, updatePasswordDto);
+  }
+
+  @Get('update_password/captcha')
+  async updatePasswordCaptcha(@Query('email') email: string) {
+    return this.userService.updatePasswordCaptcha(email);
+  }
+
+  @Post(['update', 'admin/update'])
+  @RequireLogin()
+  async update(
+    @UserInfo('userId') userId: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return await this.userService.update(userId, updateUserDto);
+  }
 }

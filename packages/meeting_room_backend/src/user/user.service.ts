@@ -10,8 +10,6 @@ import { RegisterUserDto } from './dto/register-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { REDIS_CLIENT } from '@/common/constant';
-import { RedisClientType } from 'redis';
 import { md5 } from '@/utils';
 import { EmailService } from '@/email/email.service';
 import { Role } from './entities/role.entity';
@@ -21,14 +19,16 @@ import { LoginUserVo, UserInfo } from './vo/login-user.vo';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { UserDetailVo } from './vo/user-info.vo';
+import { UpdatePasswordDto } from './dto/update-password.dto';
+import { RedisService } from '@/redis/redis.service';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    @Inject(REDIS_CLIENT)
-    private redisClient: RedisClientType,
+    private redisService: RedisService,
     @Inject(EmailService)
     private emailService: EmailService,
     @InjectRepository(Role)
@@ -82,7 +82,7 @@ export class UserService {
   }
 
   async register(user: RegisterUserDto) {
-    const captcha = await this.redisClient.get(`captcha_${user.email}`);
+    const captcha = await this.redisService.get(`captcha_${user.email}`);
 
     if (!captcha) {
       throw new HttpException('验证码已失效', HttpStatus.BAD_REQUEST);
@@ -119,9 +119,7 @@ export class UserService {
 
   async captcha(address: string) {
     const code = Math.random().toString().slice(2, 8);
-    await this.redisClient.set(`captcha_${address}`, code, {
-      EX: 60 * 5,
-    });
+    await this.redisService.set(`captcha_${address}`, code, 60 * 5);
     this.logger.log(`验证码已发送到${address}`, UserService.name);
     try {
       await this.emailService.sendMail({
@@ -287,5 +285,91 @@ export class UserService {
     vo.isFrozen = user.isFrozen;
 
     return vo;
+  }
+
+  async updatePassword(userId: number, passwordDto: UpdatePasswordDto) {
+    const { email, captcha } = passwordDto;
+    const catchCaptcha = await this.redisService.get(
+      `update_password_captcha_${email}`,
+    );
+
+    console.log(`update_password_captcha_${email}`, catchCaptcha, captcha);
+
+    if (catchCaptcha !== captcha) {
+      throw new HttpException('验证码错误', HttpStatus.BAD_REQUEST);
+    }
+
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new HttpException('用户不存在', HttpStatus.BAD_REQUEST);
+    }
+
+    user.password = md5(passwordDto.password);
+    try {
+      await this.userRepository.save(user);
+      return '修改密码成功';
+    } catch (error) {
+      this.logger.error(error, UserService);
+      return '修改密码失败';
+    }
+  }
+
+  async updatePasswordCaptcha(email: string) {
+    const code = Math.random().toString().slice(2, 8);
+    await this.redisService.set(
+      `update_password_captcha_${email}`,
+      code,
+      60 * 5,
+    );
+    try {
+      // await this.emailService.sendMail({
+      //   to: email,
+      //   subject: '修改密码验证码',
+      //   html: `您的验证码是${code}，5分钟内有效`,
+      // });
+    } catch (error) {
+      this.logger.error(error, UserService);
+    } finally {
+      return {
+        captcha: code,
+      };
+    }
+  }
+
+  async update(userId: number, updateUserDto: UpdateUserDto) {
+    if (!userId) {
+      throw new HttpException('用户不存在', HttpStatus.BAD_REQUEST);
+    }
+
+    const foundUser = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (updateUserDto.headPic) {
+      foundUser.headPic = updateUserDto.headPic;
+    }
+
+    if (updateUserDto.nickName) {
+      foundUser.nickName = updateUserDto.nickName;
+    }
+
+    if (updateUserDto.phoneNumber) {
+      foundUser.phoneNumber = updateUserDto.phoneNumber;
+    }
+
+    try {
+      await this.userRepository.save(foundUser);
+      return '修改用户信息成功';
+    } catch (error) {
+      this.logger.error(error, UserService);
+      return '修改用户信息失败';
+    }
   }
 }
