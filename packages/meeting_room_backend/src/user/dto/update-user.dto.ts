@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsEmail,
@@ -7,15 +8,18 @@ import {
 
 export class UpdateUserDto {
   @IsOptional()
+  @ApiProperty()
   headPic: string;
 
   @IsOptional()
+  @ApiProperty()
   nickName: string;
 
   @IsOptional()
   @IsPhoneNumber('CN', {
     message: '手机号格式错误',
   })
+  @ApiProperty()
   phoneNumber: string;
 
   @IsNotEmpty({
@@ -27,10 +31,16 @@ export class UpdateUserDto {
       message: '不是合法的邮箱格式',
     },
   )
+  @ApiProperty({
+    description: '邮箱',
+  })
   email: string;
 
   @IsNotEmpty({
     message: '验证码不能为空',
+  })
+  @ApiProperty({
+    description: '验证码',
   })
   captcha: string;
 }

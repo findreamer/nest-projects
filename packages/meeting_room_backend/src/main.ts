@@ -8,6 +8,7 @@ import {
 } from '@/common/interceptor';
 import { UnloginFilter } from './common/filter/unlogin.filter';
 import { CustomExceptionFilter } from './common/filter/custom-exception.filter';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,6 +27,20 @@ async function bootstrap() {
   app.useGlobalFilters(new CustomExceptionFilter());
 
   const configService = app.get(ConfigService);
+
+  const documentConfig = new DocumentBuilder()
+    .setTitle('会议室预订系统')
+    .setDescription('会议室预订系统接口文档')
+    .setVersion('1.0')
+    .addBearerAuth({
+      type: 'http',
+      name: 'Authorization',
+      description: 'Bearer token',
+      in: 'header',
+    })
+    .build();
+  const document = SwaggerModule.createDocument(app, documentConfig);
+  SwaggerModule.setup('api-doc', app, document);
   await app.listen(configService.get('nest_server_port') ?? 3000);
 }
 bootstrap();
