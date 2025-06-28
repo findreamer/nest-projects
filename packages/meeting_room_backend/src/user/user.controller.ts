@@ -7,6 +7,9 @@ import {
   ParseIntPipe,
   DefaultValuePipe,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
@@ -23,6 +26,8 @@ import {
 } from '@nestjs/swagger';
 import { LoginUserVo } from './vo/login-user.vo';
 import { UserListVo } from './vo/user-list.vo';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { storage } from '@/utils';
 
 @ApiTags('用户管理模块')
 @Controller('user')
@@ -249,5 +254,27 @@ export class UserController {
       nickName,
       username,
     );
+  }
+
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      dest: 'uploads',
+      limits: {
+        fileSize: 1024 * 1024 * 3,
+      },
+      storage: storage,
+      fileFilter: (req, file, cb) => {
+        if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+          cb(null, true);
+        } else {
+          cb(new BadRequestException('只能上传图片！'), false);
+        }
+      },
+    }),
+  )
+  async upload(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return file.path;
   }
 }
