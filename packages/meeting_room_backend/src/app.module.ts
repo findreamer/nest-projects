@@ -11,6 +11,7 @@ import * as path from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { LoginGuard } from './common/guard/login.guard';
 import { PermissionGuard } from './common/guard/permission.guard';
+import { MeetingRoomModule } from './meeting-room/meeting-room.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { PermissionGuard } from './common/guard/permission.guard';
     }),
     UserModule,
     EmailModule,
+    MeetingRoomModule,
   ],
   controllers: [AppController],
   providers: [
