@@ -13,11 +13,15 @@ export class CustomExceptionFilter implements ExceptionFilter {
 
     response.statusCode = exception.getStatus();
     const res = exception.getResponse() as { message: string[] };
+
+    // console.log('res => ', res);
     response
       .json({
         code: exception.getStatus(),
         message: 'fail',
-        data: res?.message?.join(',') || exception.message,
+        data: Array.isArray(res?.message)
+          ? res?.message?.join(',')
+          : exception.message,
       })
       .end();
   }
