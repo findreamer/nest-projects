@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   CreateDateColumn,
@@ -7,27 +8,31 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class MeetingRoomEntity {
+export class MeetingRoom {
   @PrimaryGeneratedColumn({
     comment: '会议室id',
   })
+  @ApiProperty()
   id: number;
 
   @Column({
     length: 50,
     comment: '会议室名字',
   })
+  @ApiProperty()
   name: string;
 
   @Column({
     comment: '会议室容量',
   })
+  @ApiProperty()
   capacity: number;
 
   @Column({
     length: 50,
     comment: '会议室位置',
   })
+  @ApiProperty()
   location: string;
 
   @Column({
@@ -42,12 +47,14 @@ export class MeetingRoomEntity {
     comment: '描述',
     default: '',
   })
+  @ApiProperty()
   description: string;
 
   @Column({
     comment: '是否被预订',
     default: false,
   })
+  @ApiProperty()
   isBooked: boolean;
 
   @CreateDateColumn({

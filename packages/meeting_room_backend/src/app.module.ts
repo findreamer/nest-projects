@@ -27,7 +27,7 @@ import { MeetingRoomModule } from './meeting-room/meeting-room.module';
           database: config.get('mysql_server_database'),
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
           synchronize: true,
-          logging: false,
+          logging: true,
           poolSize: 10,
           connectorPackage: 'mysql2',
           // extra: {
