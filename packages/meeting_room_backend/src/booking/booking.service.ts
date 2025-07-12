@@ -1,6 +1,5 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { UpdateBookingDto } from './dto/update-booking.dto';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import {
   EntityManager,
@@ -12,7 +11,6 @@ import {
 import { User } from '@/user/entities/user.entity';
 import { MeetingRoom } from '@/meeting-room/entities/meeting-room.entity';
 import { Booking } from './entities/booking.entity';
-import { classToPlain } from 'class-transformer';
 import { RedisService } from '@/redis/redis.service';
 import { EmailService } from '@/email/email.service';
 
