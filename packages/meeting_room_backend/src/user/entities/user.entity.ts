@@ -8,6 +8,7 @@ import {
 import { Role } from './role.entity';
 import { BaseEntity } from '@/common/entities/base.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 @Entity({
   name: 'users',
 })
@@ -28,6 +29,9 @@ export class User extends BaseEntity {
     comment: '密码',
   })
   @ApiProperty()
+  @Exclude({
+    toPlainOnly: true,
+  })
   password: string;
 
   @Column({

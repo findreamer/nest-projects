@@ -12,6 +12,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { LoginGuard } from './common/guard/login.guard';
 import { PermissionGuard } from './common/guard/permission.guard';
 import { MeetingRoomModule } from './meeting-room/meeting-room.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { MeetingRoomModule } from './meeting-room/meeting-room.module';
     UserModule,
     EmailModule,
     MeetingRoomModule,
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [
