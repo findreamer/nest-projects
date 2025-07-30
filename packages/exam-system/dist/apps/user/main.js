@@ -35808,6 +35808,9 @@ let UserController = class UserController {
     async register(registerUser) {
         return await this.userService.register(registerUser);
     }
+    async getRegisterCaptcha(address) {
+        return this.userService.getRegisterCaptcha(address);
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -35821,6 +35824,13 @@ __decorate([
     __metadata("design:paramtypes", [typeof (_c = typeof register_user_dto_1.RegisterUserDto !== "undefined" && register_user_dto_1.RegisterUserDto) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "register", null);
+__decorate([
+    (0, common_1.Get)('register-captcha'),
+    __param(0, (0, common_1.Query)('address')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getRegisterCaptcha", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [typeof (_a = typeof user_service_1.UserService !== "undefined" && user_service_1.UserService) === "function" ? _a : Object])
@@ -35850,12 +35860,13 @@ const user_controller_1 = __webpack_require__(/*! ./user.controller */ "./apps/u
 const user_service_1 = __webpack_require__(/*! ./user.service */ "./apps/user/src/user.service.ts");
 const redis_1 = __webpack_require__(/*! @app/redis */ "./libs/redis/src/index.ts");
 const prisma_1 = __webpack_require__(/*! @app/prisma */ "./libs/prisma/src/index.ts");
+const email_1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@app/email'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [redis_1.RedisModule, prisma_1.PrismaModule],
+        imports: [redis_1.RedisModule, prisma_1.PrismaModule, email_1.EmailModule],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService],
     })
@@ -35881,12 +35892,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UserService = void 0;
 const prisma_1 = __webpack_require__(/*! @app/prisma */ "./libs/prisma/src/index.ts");
 const redis_1 = __webpack_require__(/*! @app/redis */ "./libs/redis/src/index.ts");
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const email_1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@app/email'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 let UserService = class UserService {
     constructor() {
         this.logger = new common_1.Logger();
@@ -35927,6 +35939,19 @@ let UserService = class UserService {
             return null;
         }
     }
+    async getRegisterCaptcha(address) {
+        if (!address) {
+            throw new common_1.HttpException('地址不能为空', common_1.HttpStatus.BAD_REQUEST);
+        }
+        const code = Math.random().toString().slice(2, 8);
+        await this.redisService.set(`captcha_${address}`, code, 60 * 5);
+        await this.emailService.sendMail({
+            to: address,
+            subject: '注册验证码',
+            html: `<p>你的注册验证码是 ${code}</p>`,
+        });
+        return '发送成功';
+    }
 };
 exports.UserService = UserService;
 __decorate([
@@ -35937,6 +35962,10 @@ __decorate([
     (0, common_1.Inject)(redis_1.RedisService),
     __metadata("design:type", typeof (_b = typeof redis_1.RedisService !== "undefined" && redis_1.RedisService) === "function" ? _b : Object)
 ], UserService.prototype, "redisService", void 0);
+__decorate([
+    (0, common_1.Inject)(email_1.EmailService),
+    __metadata("design:type", typeof (_c = typeof email_1.EmailService !== "undefined" && email_1.EmailService) === "function" ? _c : Object)
+], UserService.prototype, "emailService", void 0);
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)()
 ], UserService);
