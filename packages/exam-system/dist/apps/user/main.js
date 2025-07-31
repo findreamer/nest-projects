@@ -48162,7 +48162,9 @@ const user_module_1 = __webpack_require__(/*! ./user.module */ "./apps/user/src/
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(user_module_1.UserModule);
-    app.useGlobalPipes(new common_1.ValidationPipe());
+    app.useGlobalPipes(new common_1.ValidationPipe({
+        transform: true,
+    }));
     await app.listen(process.env.port ?? 3001);
 }
 bootstrap();
